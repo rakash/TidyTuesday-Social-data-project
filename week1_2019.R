@@ -131,9 +131,6 @@ g <- ggplot(tt5, aes(screen_name, total_favr)) +
 g + geom_jitter(aes(col=screen_name, size=total_favr)) + 
   geom_smooth(aes(col=screen_name), method="lm", se=F)
 
-# ggsave(filename="tidytuesday.png",path=here("Week20190101_files"),width = 9, height = 6)
-
-
 ## 4. Total #rstats and #tidytuesday tweets over time in 2018 ?
 
 
@@ -149,9 +146,7 @@ rtotal <- rstats1 %>%
   filter(created_at >= as.Date("2018-01-01")) %>%
   group_by(tweet_month) %>%
   summarise(month_tweets=n()) %>%
-  #filter(n>9) %>%
   arrange(desc(month_tweets))# %>%
-#head(10)
 
 theme_set(theme_light())
 
@@ -179,15 +174,13 @@ ttotal <- ttotal %>%
   filter(created_at >= as.Date("2018-01-01")) %>%
   group_by(tweet_month) %>%
   summarise(month_tweets=n()) %>%
-  #filter(n>9) %>%
   arrange(desc(month_tweets))# %>%
-#head(10)
 
 View(ttotal)
 
 theme_set(theme_dark())
 
-# Allow Default X Axis Labels
+# plot 
 ggplot(ttotal , aes(x = tweet_month, y = month_tweets)) +
   geom_bar(fill = "#0073C2FF", stat = "identity") +
   geom_text(aes(label = month_tweets), vjust = -0.3) + 
